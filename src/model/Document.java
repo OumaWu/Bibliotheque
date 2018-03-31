@@ -1,7 +1,7 @@
 package model;
 
 // TO DO ...
-public abstract class Document {
+public abstract class Document implements Comparable<Document>, Cloneable {
 	
 	private static int compteur = 1;
 	private int numEnreg;
@@ -34,4 +34,13 @@ public abstract class Document {
 		this.numEnreg = numEnreg;
 	}
 	
+	@Override
+	public int compareTo(Document doc) {
+		return this.titre.compareTo(doc.titre);
+	}
+	
+	@Override
+	public Document clone() {
+		return null;
+	}
 }

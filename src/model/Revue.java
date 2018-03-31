@@ -48,4 +48,9 @@ public class Revue extends Document {
 		return this.getNumEnreg() + "\"" + this.getTitre() + "\""
 				+ ", " + mois + ", " + annee + ".";
 	}
+
+	@Override
+	public Document clone() {
+		return new Revue(getTitre(), mois, annee);
+	}
 }

@@ -1,7 +1,9 @@
 package model;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
-public class Bibliotheque {
+public class Bibliotheque implements Cloneable {
 
 	// Liste des documents de la bibliotheque
 	private List<Document> documents;
@@ -11,7 +13,18 @@ public class Bibliotheque {
 	 */
 	public Bibliotheque() {
 		// TO DO ... ( "vide" ne veut pas dire null ! )
-		throw new RuntimeException("Bibliotheque() not yet implemented"); 
+//		throw new RuntimeException("Bibliotheque() not yet implemented"); 
+		this.documents = new ArrayList<Document>();
+	}
+	
+	/**
+	 * Réaliser un clonage profond de votre bibliothèque 
+	 */
+	public Bibliotheque(List<Document> documents) {
+		this.documents = new ArrayList<Document>();
+		for (Document doc : documents) {
+			this.documents.add(doc.clone());
+		}
 	}
 	
 	/**
@@ -27,7 +40,8 @@ public class Bibliotheque {
 	 */
 	public Document getDocument(int i) {
 		// TO DO ...
-		throw new RuntimeException("getDocument() not yet implemented"); 
+//		throw new RuntimeException("getDocument() not yet implemented"); 
+		return this.documents.get(i);
 	}
 	
 	/**
@@ -37,7 +51,12 @@ public class Bibliotheque {
 	 */
 	public boolean addDocument(Document doc) {
 		// TO DO ...
-		throw new RuntimeException("addDocument() not yet implemented"); 
+//		throw new RuntimeException("addDocument() not yet implemented"); 
+		if (doc!=null && !this.documents.contains(doc)) {
+			this.documents.add(doc);
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -46,7 +65,26 @@ public class Bibliotheque {
 	 */
 	public boolean removeDocument(Document doc) {
 		// TO DO ...
-		throw new RuntimeException("removeDocument() not yet implemented"); 
+//		throw new RuntimeException("removeDocument() not yet implemented");
+		if (this.documents.contains(doc)) {
+			this.documents.remove(doc);
+			return true;
+		}
+		return false;
+	}
+	 /**
+	  * Opérer un tri lexicographique des documents de la bibliothèque
+	  */
+	public void triLexico() {
+		Collections.sort(this.documents);
+	}
+	
+	/**
+	 * Réaliser un clonage profond de votre bibliothèque 
+	 */
+	@Override
+	public Bibliotheque clone() {
+		return new Bibliotheque(this.documents);
 	}
 
 	@Override

@@ -35,4 +35,9 @@ public class Roman extends Livre implements InterfaceAuteur {
 	public String toString() {
 		return super.toString() + ", prix " + this.prixLitteraire;
 	}
+	
+	@Override
+	public Document clone() {
+		return new Roman(getTitre(), getAuteur(), getNbPages(), prixLitteraire);
+	}
 }

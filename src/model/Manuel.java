@@ -31,4 +31,9 @@ public class Manuel extends Livre implements InterfaceAuteur {
 	public String toString() {
 		return super.toString() + ", niveau " + this.niveau;
 	}
+	
+	@Override
+	public Document clone() {
+		return new Manuel(getTitre(), getAuteur(), getNbPages(), niveau);
+	}
 }

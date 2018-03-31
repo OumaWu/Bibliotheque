@@ -47,4 +47,15 @@ public class Livre extends Document implements InterfaceAuteur {
 				+ ", \"" + auteur + "\", " + nbPages + " p";
 	}
 	
+	@Override
+	public int compareTo(Document doc) {
+		if (!this.getTitre().equals(doc.getTitre()))
+			return this.getTitre().compareTo(doc.getTitre());
+		return this.getAuteur().compareTo(((Livre)doc).getAuteur());
+	}
+	
+	@Override
+	public Document clone() {
+		return new Livre(getTitre(), auteur, nbPages);
+	}	
 }

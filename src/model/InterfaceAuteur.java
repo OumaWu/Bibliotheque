@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Définit un document qui possède un auteur.
+ * DÃ©finit un document qui possÃ¨de un auteur.
  */
 public interface InterfaceAuteur {
 

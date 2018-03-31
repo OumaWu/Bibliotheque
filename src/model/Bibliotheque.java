@@ -90,5 +90,5 @@ public class Bibliotheque implements Cloneable {
 	@Override
 	public String toString() {
 		return "Bibliotheque de " + documents.size() + " documents";
-	}	
+	}
 }

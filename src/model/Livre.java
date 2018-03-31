@@ -1,10 +1,20 @@
 package model;
 
+import java.util.Comparator;
+
 // TO DO ...
 public class Livre extends Document implements InterfaceAuteur {
 
 	private String auteur;
 	private int nbPages;
+	public static final Comparator<Livre> TRI_AUTEUR = new Comparator<Livre>() {
+
+		@Override
+		public int compare(Livre l1, Livre l2) {
+			return l1.getAuteur().compareTo(l2.getAuteur());
+		}
+		
+	};
 
 	public Livre(String titre, String auteur, int nbPages) {
 		super(titre);

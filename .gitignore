@@ -1,3 +1,10 @@
+# All directory except for src
+!src/
+
+# Project file
+.classpath
+.project
+
 # Compiled class file
 *.class
 

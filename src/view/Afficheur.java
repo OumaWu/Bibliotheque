@@ -1,6 +1,5 @@
 package view;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -21,6 +20,10 @@ import model.Livre;
 
 public class Afficheur extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6737888159021371280L;
 	private Bibliotheque bibliotheque;
 	private JTextArea jta;
 	private JScrollPane sjp;
@@ -107,8 +110,16 @@ public class Afficheur extends JFrame {
 		}
 		
 		Collections.sort(avecAuteurs, Livre.TRI_AUTEUR);
+		List<String> auteurs = new ArrayList<String>();
+		
 		for (Document doc : avecAuteurs) {
-			jta.append(((Livre) doc).getAuteur() + "\n");
+			if (!auteurs.contains(((Livre) doc).getAuteur())) {
+				auteurs.add(((Livre) doc).getAuteur());
+			}
+		}
+		
+		for (String auteur : auteurs) {
+			jta.append(auteur + "\n");
 		}
 		jta.append("\n");
 		this.setVisible(true);

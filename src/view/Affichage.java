@@ -37,8 +37,16 @@ public class Affichage {
 		}
 		
 		Collections.sort(avecAuteurs, Livre.TRI_AUTEUR);
+		List<String> auteurs = new ArrayList<String>();
+		
 		for (Document doc : avecAuteurs) {
-			System.out.println(((Livre) doc).getAuteur());
+			if (!auteurs.contains(((Livre) doc).getAuteur())) {
+				auteurs.add(((Livre) doc).getAuteur());
+			}
+		}
+		
+		for (String auteur : auteurs) {
+			System.out.println(auteur + "\n");
 		}
 	}
 }

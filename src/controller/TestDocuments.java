@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import model.Bibliotheque;
 import model.Document;
 import model.Livre;

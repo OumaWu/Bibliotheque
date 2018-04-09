@@ -1,5 +1,7 @@
 package view;
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,24 +17,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import model.Bibliotheque;
 import model.Document;
+import model.Livre;
 import model.Roman;
 
 public class SaisieLivre extends JFrame {
 	
 	private Bibliotheque bbth;
-	private GridBagConstraints gbc;
-	private Font font;
-	private JLabel lbTitre, lbAuteur, lbNbPage, lbPrix;
-	private JTextField tfTitre, tfAuteur, tfNbPage;
 	private JButton jbValider;
-	private JPanel jp;
-	private JRadioButton prixChoix[];
-	private ButtonGroup prixGroup;
-	private Box box;
-	private String prixTitle[] = {"Aucun","Goncourt","Medicis","Interallie"};
+	private JTabbedPane tabPanel;
+	private JPanel bottom;
+	private JPanel panelRoman, panelManuel, panelRevue;
+	private int tableIndex;
 	
 	public SaisieLivre(Bibliotheque bbth) throws HeadlessException {
 		super();
@@ -43,61 +46,22 @@ public class SaisieLivre extends JFrame {
 	}
 	
 	public void initComponents() {
-		jp = new JPanel();
-		font = new Font("Consolas", Font.BOLD, 18);
-		lbTitre = new JLabel("Titre : ");
-		lbAuteur = new JLabel("Auteur : ");
-		lbNbPage = new JLabel("NB pages : ");
-		lbPrix = new JLabel("Prix litteraire : ");
-		tfTitre = new JTextField(5);
-		tfAuteur = new JTextField(5);
-		tfNbPage = new JTextField(5);
+		
+		tabPanel = new JTabbedPane();
+		bottom = new JPanel();
+		panelRoman = new PanelRoman();
+		panelManuel = new PanelManuel();
+		panelRevue = new PanelRevue();
 		jbValider = new JButton("Valider");
-		
-		box = Box.createHorizontalBox();
-		prixChoix = new JRadioButton[4];
-		prixGroup = new ButtonGroup();
-		for (int i = 0; i < prixChoix.length; i++) {
-			prixChoix[i] = new JRadioButton(prixTitle[i]);
-			prixGroup.add(prixChoix[i]);
-			box.add(prixChoix[i]);
-		}
-		prixChoix[0].setSelected(true);
-		
-		jp.setLayout(new GridBagLayout());
-		lbTitre.setFont(font);
-		lbAuteur.setFont(font);
-		lbNbPage.setFont(font);
-		lbPrix.setFont(font);
-		
-		addComponent(jp, lbTitre, 0, 0, 1, 1, 0, 0, GridBagConstraints.LINE_START, GridBagConstraints.NONE);
-		addComponent(jp, tfTitre, 1, 0, 3, 1, 0, 0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
-		addComponent(jp, lbAuteur, 0, 1, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE);
-		addComponent(jp, tfAuteur, 1, 1, 3, 1, 0, 0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
-		addComponent(jp, lbNbPage, 0, 2, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE);
-		addComponent(jp, tfNbPage, 1, 2, 2, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE);
-		addComponent(jp, lbPrix, 0, 3, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE);
-		addComponent(jp, box, 1, 3, 3, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL);
-		addComponent(jp, jbValider, 1, 4, 10, 10, 0, 0, GridBagConstraints.LAST_LINE_END, GridBagConstraints.NONE);
-		
-		this.add(jp);
-	}
-	
-	private void addComponent(Container con, JComponent comp, int xPos, int yPos,
-			int compWidth, int compHeight, int ipadx, int ipady, int anchor, int fill) {
-		gbc = new GridBagConstraints();
-		gbc.gridx = xPos;
-		gbc.gridy = yPos;
-		gbc.gridwidth = compWidth;
-		gbc.gridheight = compHeight;
-		gbc.weightx = 1;
-		gbc.weighty = 0;
-		gbc.ipadx = ipadx;
-		gbc.ipady = ipady;
-		gbc.insets = new Insets(15, 12, 15, 12);
-		gbc.anchor = anchor;
-		gbc.fill = fill;
-		con.add(comp, gbc);
+				
+		tabPanel.addTab("Roman", null, panelRoman, "Page pour saisir un roman");
+		tabPanel.addTab("Manuel", null, panelManuel, "Page pour saisir un manuel");
+		tabPanel.addTab("Revue", null, panelRevue, "Page pour saisir une revue");
+		bottom.setLayout(new FlowLayout(SwingConstants.RIGHT));
+		bottom.add(jbValider);
+		this.setLayout(new BorderLayout());
+		this.add(tabPanel, BorderLayout.CENTER);
+		this.add(bottom, BorderLayout.SOUTH);
 	}
 	
 	public void initSettings() {
@@ -109,56 +73,97 @@ public class SaisieLivre extends JFrame {
 	}
 		
 	public void setListeners() {
+		
+		tabPanel.addChangeListener(new ChangeListener() {
+			
+		      public void stateChanged(ChangeEvent changeEvent) {
+		          JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+		          tableIndex = sourceTabbedPane.getSelectedIndex();
+		      } 
+		});
+		
 		jbValider.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (!tfAuteur.getText().isEmpty() &&
-						!tfTitre.getText().isEmpty() &&
-						!tfNbPage.getText().isEmpty()){
-					
-					Document roman = null;
-					String auteur = tfAuteur.getText();
-					String titre = tfTitre.getText();
-					int nbPage = 0;
-					int prixLitt = 0;
-					
-					try {
-						nbPage = Integer.parseInt(tfNbPage.getText());
-						for (JRadioButton jbr : prixChoix) {
-							if (jbr.isSelected()) {
-								switch (jbr.getText().toUpperCase()) {
-								case "AUCUN" :
-									prixLitt = 0;
-									break;
-								case "GONCOURT" :
-									prixLitt = 1;
-									break;
-								case "MEDICIS" :
-									prixLitt = 2;
-									break;
-								case "INTERALLIE" :
-									prixLitt = 3;
-									break;
-								}
-							}
-						}
-
-						roman = new Roman(titre, auteur, nbPage, prixLitt);
-						System.out.println(roman);
-						if (bbth.addDocument(roman)) {
-							new DialogNotif("Ajout avec success !");
-							SaisieLivre.this.dispose();
-						}
-						
-					} catch (Exception e) {
-						new DialogNotif("Erreur ! Veuillez saisir un entier pour le nombre de page !");
-					}
-				}
-				else {
-					new DialogNotif("Erreur ! Veuillez saisir tous les champs necessaire !");
+				
+				System.out.println("Saisir " + tabPanel.getTitleAt(tableIndex));
+				
+				switch(tabPanel.getTitleAt(tableIndex).toUpperCase()) {
+					case "MANUEL" :
+						addManuel();
+						break;
+					case "REVUE" :
+						addRevue();
+						break;
+					default :
+						addRoman();
+						break;
 				}
 			}
 		});
+	}
+	
+	private void addRoman() {
+		switch(((PanelRoman) SaisieLivre.this.panelRoman).checkParam()) {
+			case -1 :
+				new DialogNotif("Erreur ! Veuillez saisir tous les champs necessaire !");
+				break;
+			case -2 :
+				new DialogNotif("Erreur ! Veuillez saisir un entier pour le nombre de page !");
+				break;
+			default :
+				Livre roman = ((PanelRoman) SaisieLivre.this.panelRoman).getRoman();
+				
+				System.out.println(roman);
+				if (bbth.addDocument(roman)) {
+					new DialogNotif("Ajout avec success !");
+					
+				}
+				SaisieLivre.this.dispose();
+				break;
+		}
+	}
+	
+	private void addManuel() {
+		switch(((PanelManuel) SaisieLivre.this.panelManuel).checkParam()) {
+			case -1 :
+				new DialogNotif("Erreur ! Veuillez saisir tous les champs necessaire !");
+				break;
+			case -2 :
+				new DialogNotif("Erreur ! Veuillez saisir un entier pour le nombre de page !");
+				break;
+			default :
+				Livre manuel = ((PanelManuel) SaisieLivre.this.panelManuel).getManuel();
+				
+				System.out.println(manuel);
+				if (bbth.addDocument(manuel)) {
+					new DialogNotif("Ajout avec success !");
+					
+				}
+				SaisieLivre.this.dispose();
+				break;
+		}
+	}
+	
+	private void addRevue() {
+		switch(((PanelRevue) SaisieLivre.this.panelRevue).checkParam()) {
+			case -1 :
+				new DialogNotif("Erreur ! Veuillez saisir tous les champs necessaire !");
+				break;
+			case -2 :
+				new DialogNotif("Erreur ! Veuillez saisir un entier le mois et l'annee !");
+				break;
+			default :
+				Document revue = ((PanelRevue) SaisieLivre.this.panelRevue).getRevue();
+				
+				System.out.println(revue);
+				if (bbth.addDocument(revue)) {
+					new DialogNotif("Ajout avec success !");
+					
+				}
+				SaisieLivre.this.dispose();
+				break;
+		}
 	}
 }

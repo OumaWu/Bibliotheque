@@ -21,10 +21,7 @@ public class Bibliotheque implements Cloneable {
 	 * Réaliser un clonage profond de votre bibliothèque 
 	 */
 	public Bibliotheque(List<Document> documents) {
-		this.documents = new ArrayList<Document>();
-		for (Document doc : documents) {
-			this.documents.add(doc.clone());
-		}
+		this.documents = documents;
 	}
 	
 	/**
@@ -51,7 +48,6 @@ public class Bibliotheque implements Cloneable {
 	 */
 	public boolean addDocument(Document doc) {
 		// TO DO ...
-//		throw new RuntimeException("addDocument() not yet implemented"); 
 		if (doc!=null && !this.documents.contains(doc)) {
 			this.documents.add(doc);
 			return true;
@@ -84,11 +80,21 @@ public class Bibliotheque implements Cloneable {
 	 */
 	@Override
 	public Bibliotheque clone() {
-		return new Bibliotheque(this.documents);
+		Bibliotheque bClone = new Bibliotheque();
+		for (Document doc : documents) {
+			bClone.documents.add(doc.clone());
+		}
+		return bClone;
 	}
 
 	@Override
 	public String toString() {
-		return "Bibliotheque de " + documents.size() + " documents";
+		return "Bibliotheque de " + documents.size() + " documents\n" + this.documents.toString();
 	}
 }
+
+
+
+
+
+

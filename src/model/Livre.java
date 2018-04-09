@@ -53,8 +53,8 @@ public class Livre extends Document implements InterfaceAuteur {
 	 */
 	@Override
 	public String toString() {
-		return this.getNumEnreg() + "\"" + this.getTitre() + "\""
-				+ ", \"" + auteur + "\", " + nbPages + " p";
+		return this.getNumEnreg() + " - \"" + this.getTitre() + "\""
+				+ ", \"" + auteur + "\", " + nbPages + " p\n";
 	}
 	
 	@Override
@@ -67,5 +67,39 @@ public class Livre extends Document implements InterfaceAuteur {
 	@Override
 	public Document clone() {
 		return new Livre(getTitre(), auteur, nbPages);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((auteur == null) ? 0 : auteur.hashCode());
+		result = prime * result + nbPages;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Livre other = (Livre) obj;
+		if (auteur == null) {
+			if (other.auteur != null)
+				return false;
+		} else if (!auteur.equals(other.auteur))
+			return false;
+		if (nbPages != other.nbPages)
+			return false;
+		return true;
 	}	
 }

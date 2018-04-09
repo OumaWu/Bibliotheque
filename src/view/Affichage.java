@@ -22,7 +22,26 @@ public class Affichage {
 				avecAuteurs.add((Livre) doc);
 			}
 		}
+		
 		Collections.sort(avecAuteurs, Livre.TRI_AUTEUR);
-		System.out.println(avecAuteurs);
+		for (Document doc : avecAuteurs) {
+			System.out.println(((Livre) doc).getAuteur());
+		}
+		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

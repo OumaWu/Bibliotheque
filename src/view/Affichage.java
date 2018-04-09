@@ -10,6 +10,19 @@ import model.*;
  */
 public class Affichage {
 
+	private Bibliotheque bibliotheque;
+	public Afficheur afficheur;
+	
+	public Affichage(Bibliotheque bibliotheque) {
+		this.bibliotheque = bibliotheque;
+		this.afficheur = new Afficheur(bibliotheque);
+	}
+	
+	public Bibliotheque getBibliotheque() {
+		return bibliotheque;
+	}
+
+
 	// TO DO ...
 	public void afficherDocuments(Collection<Document> docs) {
 		System.out.println(docs);
@@ -27,7 +40,6 @@ public class Affichage {
 		for (Document doc : avecAuteurs) {
 			System.out.println(((Livre) doc).getAuteur());
 		}
-		
 	}
 }
 

@@ -7,6 +7,10 @@ public class Livre extends Document implements InterfaceAuteur {
 
 	private String auteur;
 	private int nbPages;
+	
+	/**
+	 * Comparateur pour trier les livres selon leurs auteurs
+	 */
 	public static final Comparator<Livre> TRI_AUTEUR = new Comparator<Livre>() {
 
 		@Override

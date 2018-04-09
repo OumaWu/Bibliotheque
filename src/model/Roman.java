@@ -33,7 +33,9 @@ public class Roman extends Livre implements InterfaceAuteur {
 	@Override
 	public String toString() {
 		return this.getNumEnreg() + " - \"" + this.getTitre() + "\""
-				+ ", \"" + getAuteur() + "\", " + getNbPages() + " p, prix " + this.prixLitteraire + "\n";
+				+ ", \"" + getAuteur() + "\", " + getNbPages() + " p, prix "
+				+ (this.prixLitteraire == GONCOURT ? "GONCOURT" :
+					this.prixLitteraire == MEDICIS ? "MEDICIS" : "INTERALLIE") + "\n";
 	}
 	
 	@Override

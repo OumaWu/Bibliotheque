@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class DialogErreur extends JDialog {
+public class DialogNotif extends JDialog {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class DialogErreur extends JDialog {
 	protected JButton ok;
 	protected JPanel jp;
 	
-	public DialogErreur(String msg) {
+	public DialogNotif(String msg) {
 		
 		jl = new JLabel("<html><div align='center'>" + msg + "</div></html>");
 		ok = new JButton("OK");
@@ -40,7 +40,7 @@ public class DialogErreur extends JDialog {
 				dispose();
 			}
 		});
-		setTitle("Erreur");
+		setTitle("Notification");
 		setMinimumSize(new Dimension(450, 200));
 		setLocationRelativeTo(getOwner());
 		this.setSize(500, 200);

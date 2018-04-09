@@ -16,10 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
 import model.Bibliotheque;
 import model.Document;
-import model.Livre;
 import model.Roman;
 
 public class SaisieLivre extends JFrame {
@@ -106,7 +104,7 @@ public class SaisieLivre extends JFrame {
 		this.setTitle("Saisie document");
 		this.setLocation(400,250);
 		this.setSize(550, 350);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
 		
@@ -145,20 +143,20 @@ public class SaisieLivre extends JFrame {
 								}
 							}
 						}
-						
+
 						roman = new Roman(titre, auteur, nbPage, prixLitt);
 						System.out.println(roman);
 						if (bbth.addDocument(roman)) {
-							System.out.println(bbth);
+							new DialogNotif("Ajout avec success !");
+							SaisieLivre.this.dispose();
 						}
 						
 					} catch (Exception e) {
-						new DialogErreur("Erreur ! Veuillez saisir un entier pour le nombre de page !");
-						e.printStackTrace();
+						new DialogNotif("Erreur ! Veuillez saisir un entier pour le nombre de page !");
 					}
 				}
 				else {
-					new DialogErreur("Erreur ! Veuillez saisir tous les champs necessaire !");
+					new DialogNotif("Erreur ! Veuillez saisir tous les champs necessaire !");
 				}
 			}
 		});

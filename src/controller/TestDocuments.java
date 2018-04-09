@@ -34,15 +34,15 @@ public class TestDocuments {
 //		affichage.afficherDocuments(Arrays.asList(documents));
 //		affichage.afficherAuteurs(Arrays.asList(documents));
 		
-		/*for ( Document doc : documents ) {
-			System.out.println(doc);
-		}*/
-		
 		List<Document> docs = new ArrayList<Document>(Arrays.asList(documents));
 		Bibliotheque b = new Bibliotheque(docs);
 		
+		Affichage aff = new Affichage(b);
+		aff.afficherDocuments(aff.getBibliotheque().getDocuments());
+		aff.afficherAuteurs(aff.getBibliotheque().getDocuments());
+		
 //		Afficheur aff = new Afficheur(b);
-		new SaisieLivre(b);
+//		new SaisieLivre(b);
 //		b.addDocument(new Roman("asdf", "awer", 34, Roman.GONCOURT));
 //		System.out.println(b);
 	}

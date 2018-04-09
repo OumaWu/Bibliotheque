@@ -11,11 +11,9 @@ import model.*;
 public class Affichage {
 
 	private Bibliotheque bibliotheque;
-	public Afficheur afficheur;
 	
 	public Affichage(Bibliotheque bibliotheque) {
 		this.bibliotheque = bibliotheque;
-		this.afficheur = new Afficheur(bibliotheque);
 	}
 	
 	public Bibliotheque getBibliotheque() {

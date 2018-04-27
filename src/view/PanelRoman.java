@@ -12,6 +12,10 @@ import model.Roman;
 
 public class PanelRoman extends GridBagPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5000396173126795657L;
 	private Font font;
 	private JLabel lbTitre;
 	private JLabel lbAuteur;

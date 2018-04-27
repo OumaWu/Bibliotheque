@@ -28,7 +28,7 @@ public class Afficheur extends JFrame {
 	private JTextArea jta;
 	private JScrollPane sjp;
 	private JPanel bottom;
-	private JButton affDoc, affAut, addDoc;
+	private JButton affDoc, affAut, addDoc, triLexico;
 	
 	public Afficheur(Bibliotheque bibliotheque) throws HeadlessException {
 		super();
@@ -44,11 +44,13 @@ public class Afficheur extends JFrame {
 		this.bottom = new JPanel();
 		this.affDoc = new JButton("Afficher Livres");
 		this.affAut = new JButton("Afficher Auteurs");
+		this.triLexico = new JButton("Tri Lexicographique");
 		this.addDoc = new JButton("Ajouter");
 		
-		this.bottom.setLayout(new FlowLayout(SwingConstants.CENTER,65,0));
+		this.bottom.setLayout(new FlowLayout(SwingConstants.CENTER,25,5));
 		this.bottom.add(affDoc);
 		this.bottom.add(affAut);
+		this.bottom.add(triLexico);
 		this.bottom.add(addDoc);
 		this.add(sjp, BorderLayout.CENTER);
 		this.add(bottom, BorderLayout.SOUTH);
@@ -78,6 +80,16 @@ public class Afficheur extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Afficheur.this.afficherAuteurs(bibliotheque.getDocuments());
+			}
+		});
+		
+		//Action pour le bouton triLexicographique
+		triLexico.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Afficheur.this.bibliotheque.triLexico();
+				Afficheur.this.afficherDocuments(bibliotheque.getDocuments());
 			}
 		});
 		

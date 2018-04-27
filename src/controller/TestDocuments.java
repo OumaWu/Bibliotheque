@@ -1,5 +1,4 @@
 package controller;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,8 +9,6 @@ import model.Manuel;
 import model.Revue;
 import model.Roman;
 import view.Affichage;
-import view.Afficheur;
-import view.SaisieLivre;
 
 public class TestDocuments {
 

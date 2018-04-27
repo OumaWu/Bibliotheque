@@ -1,37 +1,28 @@
 package view;
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import model.Bibliotheque;
 import model.Document;
 import model.Livre;
-import model.Roman;
 
 public class SaisieLivre extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 925935274906087423L;
 	private Bibliotheque bbth;
-	private JButton jbValider;
+	private JButton jbValider, jbAnnuler;
 	private JTabbedPane tabPanel;
 	private JPanel bottom;
 	private JPanel panelRoman, panelManuel, panelRevue;
@@ -53,11 +44,13 @@ public class SaisieLivre extends JFrame {
 		panelManuel = new PanelManuel();
 		panelRevue = new PanelRevue();
 		jbValider = new JButton("Valider");
-				
+		jbAnnuler = new JButton("Annuler");
+		
 		tabPanel.addTab("Roman", null, panelRoman, "Page pour saisir un roman");
 		tabPanel.addTab("Manuel", null, panelManuel, "Page pour saisir un manuel");
 		tabPanel.addTab("Revue", null, panelRevue, "Page pour saisir une revue");
 		bottom.setLayout(new FlowLayout(SwingConstants.RIGHT));
+		bottom.add(jbAnnuler);
 		bottom.add(jbValider);
 		this.setLayout(new BorderLayout());
 		this.add(tabPanel, BorderLayout.CENTER);
@@ -100,6 +93,14 @@ public class SaisieLivre extends JFrame {
 						addRoman();
 						break;
 				}
+			}
+		});
+		
+		jbAnnuler.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SaisieLivre.this.dispose();
 			}
 		});
 	}

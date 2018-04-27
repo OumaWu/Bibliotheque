@@ -32,7 +32,7 @@ public class Bibliotheque implements Cloneable {
 	}
 
 	/**
-	 * Renvoie le i �me document de la liste des documents, s�il existe, 
+	 * Renvoie le ieme document de la liste des documents, s'il existe, 
 	 * ou null sinon.
 	 */
 	public Document getDocument(int i) {
@@ -43,7 +43,7 @@ public class Bibliotheque implements Cloneable {
 	
 	/**
 	 * Si doc est non null et n'appartient pas d�j� � la liste des documents,
-	 * alors ajoute doc � cette liste et renvoie true ;
+	 * alors ajoute doc a cette liste et renvoie true ;
 	 * sinon renvoie faux.
 	 */
 	public boolean addDocument(Document doc) {

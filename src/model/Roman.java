@@ -12,12 +12,36 @@ public class Roman extends Livre implements InterfaceAuteur {
 		super(titre, auteur, nbPages);
 		this.prixLitteraire = prixLitt;
 	}
+	
+	public Roman(int numEnreg, String titre, String auteur, int nbPages, int prixLitt) {
+		super(numEnreg, titre, auteur, nbPages);
+		this.prixLitteraire = prixLitt;
+	}
 
 	/**
 	 * @return the prixLitteraire
 	 */
 	public int getPrixLitteraire() {
-		return prixLitteraire;
+		return this.prixLitteraire;
+	}
+	
+	public String getNomPrixLitteraire() {
+		String prix = "";
+		switch (prixLitteraire) {
+			case 0 :
+				prix = "aucun prix";
+				break;
+			case 1 :
+				prix = "prix GONCOURT";
+				break;
+			case 2 :
+				prix = "prix MEDICIS";
+				break;
+			default :
+				prix = "prix INTERALLIE";
+				break;
+		}
+		return prix;
 	}
 
 	/**
@@ -33,9 +57,8 @@ public class Roman extends Livre implements InterfaceAuteur {
 	@Override
 	public String toString() {
 		return this.getNumEnreg() + " - \"" + this.getTitre() + "\""
-				+ ", \"" + getAuteur() + "\", " + getNbPages() + " p, prix "
-				+ (this.prixLitteraire == GONCOURT ? "GONCOURT" :
-					this.prixLitteraire == MEDICIS ? "MEDICIS" : "INTERALLIE") + "\n";
+				+ ", \"" + getAuteur() + "\", " + getNbPages() + " p, "
+				+ getNomPrixLitteraire() + "\n";
 	}
 	
 	@Override

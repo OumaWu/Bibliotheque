@@ -11,6 +11,12 @@ public class Revue extends Document {
 		this.mois = mois;
 		this.annee = annee;
 	}
+	
+	public Revue(int numEnreg, String titre, int mois, int annee) {
+		super(numEnreg, titre);
+		this.mois = mois;
+		this.annee = annee;
+	}
 
 	/**
 	 * @return the mois

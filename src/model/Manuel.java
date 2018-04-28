@@ -9,6 +9,11 @@ public class Manuel extends Livre implements InterfaceAuteur {
 		super(titre, auteur, nbPages);
 		this.niveau = niveau;
 	}
+	
+	public Manuel(int numEnreg, String titre, String auteur, int nbPages, int niveau) {
+		super(numEnreg, titre, auteur, nbPages);
+		this.niveau = niveau;
+	}
 
 	/**
 	 * @return the niveau

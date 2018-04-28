@@ -30,6 +30,10 @@ public class Bibliotheque implements Cloneable {
 	public List<Document> getDocuments() {
 		return documents;
 	}
+	
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
 
 	/**
 	 * Renvoie le ieme document de la liste des documents, s'il existe, 
@@ -53,6 +57,73 @@ public class Bibliotheque implements Cloneable {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * suppression de documents par titre
+	 */
+	public boolean removeParTitre(String titre) {
+		for (Document doc : this.documents) {
+			if (doc.getTitre().equals(titre)) {
+				this.documents.remove(doc);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * supprimer une liste de documents
+	 */
+	public void removeDocuments(List<Document> docs) {
+		for (Document doc : docs) {
+			this.removeDocument(doc);
+		}
+	}
+	
+	/**
+	 * suppression de roman par type de prix littéraire (GONCOURT...)
+	 */
+	public boolean removeParTitre(int prixLitt) {
+		for (Document doc : this.documents) {
+			if (doc instanceof Roman) {
+				if (((Roman)doc).getPrixLitteraire() == prixLitt) {
+					this.documents.remove(doc);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * recherche de documents par titre
+	 * @param titre
+	 */
+	public List<Document> rechercheParTitre(String titre) {
+		List<Document> res = new ArrayList<Document>();
+		for (Document doc : this.documents) {
+			if (doc.getTitre().equals(titre)) {
+				res.add(doc);
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * recherche de roman par type de prix littéraire (GONCOURT...)
+	 * @param titre
+	 */
+	public List<Document> rechercheParPrix(int prixLitt) {
+		List<Document> res = new ArrayList<Document>();
+		for (Document doc : this.documents) {
+			if (doc instanceof Roman) {
+				if (((Roman)doc).getPrixLitteraire() == prixLitt) {
+					res.add(doc);
+				}
+			}
+		}
+		return res;
 	}
 	
 	/**

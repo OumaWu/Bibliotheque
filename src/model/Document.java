@@ -11,6 +11,11 @@ public abstract class Document implements Comparable<Document>, Cloneable {
 		this.titre = titre;
 		setNumEnreg(compteur++);
 	}
+	
+	public Document(int numEnreg, String titre) {
+		this.titre = titre;
+		setNumEnreg(numEnreg);
+	}
 
 	/**
 	 * @return the titre

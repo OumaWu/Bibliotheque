@@ -25,6 +25,12 @@ public class Livre extends Document implements InterfaceAuteur {
 		this.auteur = auteur;
 		this.nbPages = nbPages;
 	}
+	public Livre(int numEnreg, String titre, String auteur, int nbPages) {
+		super(numEnreg, titre);
+		this.auteur = auteur;
+		this.nbPages = nbPages;
+	}
+	
 
 	@Override
 	public String getAuteur() {

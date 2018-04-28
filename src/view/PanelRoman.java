@@ -78,13 +78,13 @@ public class PanelRoman extends GridBagPanel {
 					prixLitt = 0;
 					break;
 				case "GONCOURT" :
-					prixLitt = 1;
+					prixLitt = Roman.GONCOURT;
 					break;
 				case "MEDICIS" :
-					prixLitt = 2;
+					prixLitt = Roman.MEDICIS;
 					break;
 				case "INTERALLIE" :
-					prixLitt = 3;
+					prixLitt = Roman.INTERALLIE;
 					break;
 				}
 			}
